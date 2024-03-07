@@ -1,7 +1,6 @@
 package org.com.longestpalindromeinastring;
 
 /* This algorithm is used memoization technique to implement */
-/* Assuming input string has length more than 2 and does not contain only whitespaces */
 public class DynamicLongestPalindrome {
 
     public static String findLongestPalindrome(final String input) throws Exception {
@@ -25,7 +24,7 @@ public class DynamicLongestPalindrome {
 
         /* logic
         *   imagine a string chars -> a1 a2 a3 a4 a5 a6 a7 a8
-        *
+        *   a2a3a4a5a6a7 is a palindrome if a2 = a7 and a3a4a5a6 is a palindrome
         * */
         for (int i = 2; i < size; i++ ) {
             for (int j = 0; j < i - 1; j++) {
