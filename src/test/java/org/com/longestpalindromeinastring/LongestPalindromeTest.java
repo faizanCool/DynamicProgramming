@@ -21,4 +21,22 @@ public class LongestPalindromeTest {
         Assertions.assertEquals( "",
                 DynamicLongestPalindrome.findLongestPalindrome("abcd"));
     }
+
+    @Test
+    public void testBruteForceLP_success() throws Exception {
+        Assertions.assertEquals( "abkkba",
+                BruteForceLongestPalindrome.findLongestPalindrome("abacabkkba"));
+    }
+
+    @Test
+    public void testBruteForceL_throwsException() {
+        Assertions.assertThrows( Exception.class,
+                () -> BruteForceLongestPalindrome.findLongestPalindrome(""));
+    }
+
+    @Test
+    public void testBruteForceL_successNoPalindrome() throws Exception {
+        Assertions.assertEquals( "",
+                BruteForceLongestPalindrome.findLongestPalindrome("abcd"));
+    }
 }
