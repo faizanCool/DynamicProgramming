@@ -1,6 +1,5 @@
 package org.com.longestpalindromeinastring;
 
-/* This algorithm is used memoization technique to implement */
 public class DynamicLongestPalindrome {
 
     public static String findLongestPalindrome(final String input) throws Exception {
@@ -10,7 +9,7 @@ public class DynamicLongestPalindrome {
 
         int from = 0, to = 0, max = 1;
         int size = input.length();
-        /* isPalindrome[i][j] means input.substring(i,j+1) is a palindrome/ not a palindrome */
+        /* isPalindrome[i][j] means input.substring(i,j+1) is a palindrome or not a palindrome */
         boolean[][] isPalindrome = new boolean[size][size];
 
 
