@@ -1,10 +1,12 @@
 package org.com.fibonacci;
 
 public class RecursiveWithMemoization {
-    private static int[] fibMemory;
+    private static Integer[] fibMemory;
 
     public static int fibonacci(int n) throws Exception {
-        fibMemory = new int[n + 1];
+        fibMemory = new Integer[n + 1];
+        fibMemory[0] = 0;
+        fibMemory[1] = 1;
         return calculateFibonacci(n);
     }
 
@@ -12,9 +14,9 @@ public class RecursiveWithMemoization {
         if (n < 0)
             throw new Exception("Negative integers not accepted");
         else if (n <= 1)
-            return n;
+            return fibMemory[n];
         else {
-            if (fibMemory[n] != 0)
+            if (fibMemory[n] != null)
                 return fibMemory[n];
             else {
                 int temp = calculateFibonacci(n - 1) + calculateFibonacci(n - 2);
