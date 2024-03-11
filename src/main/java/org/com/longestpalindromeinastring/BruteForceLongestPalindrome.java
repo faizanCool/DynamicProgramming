@@ -29,9 +29,4 @@ public class BruteForceLongestPalindrome {
         }
         return true;
     }
-
-    public static void main(String[] args) {
-        int g = 1;
-        System.out.println(g/2);
-    }
 }
