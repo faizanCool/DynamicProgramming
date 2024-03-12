@@ -25,16 +25,17 @@ public class DynamicLongestPalindrome {
         *   imagine a string chars -> a1 a2 a3 a4 a5 a6 a7 a8
         *   a2a3a4a5a6a7 is a palindrome if a2 = a7 and a3a4a5a6 is a palindrome
         * */
-        for (int i = 2; i < size; i++ ) {
-            for (int j = 0; j < i - 1; j++) {
-                boolean temp = isPalindrome[i-1][j+1] && (input.charAt(i) == input.charAt(j));
+        for (int endIndex = 2; endIndex < size; endIndex++ ) {
+            for (int startIndex = 0; startIndex < endIndex - 1; startIndex++) {
+                boolean temp = isPalindrome[endIndex-1][startIndex+1] &&
+                        (input.charAt(endIndex) == input.charAt(startIndex));
                 if (temp) {
-                    isPalindrome[i][j] = temp;
-                    int palLength = i - j + 1;
+                    isPalindrome[endIndex][startIndex] = temp;
+                    int palLength = endIndex - startIndex + 1;
                     if (max < palLength) {
                         max = palLength;
-                        from = j;
-                        to = i;
+                        from = startIndex;
+                        to = endIndex;
                     }
                 }
             }
