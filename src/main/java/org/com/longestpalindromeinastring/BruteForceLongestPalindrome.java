@@ -23,10 +23,10 @@ public class BruteForceLongestPalindrome {
 
     private static boolean isPalindrome(final String input) {
         int size = input.length();
-        for (int i = 0; i < size/2; i++ ) {
-            if (input.charAt(i) != input.charAt(size - i - 1))
-                return false;
-        }
-        return true;
+        if (size == 1)
+            return true;
+        else if (size == 2)
+            return input.charAt(0) == input.charAt(1);
+        return input.charAt(0) == input.charAt(size-1) && isPalindrome(input.substring(1, size - 1)) ;
     }
 }
