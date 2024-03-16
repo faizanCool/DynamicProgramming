@@ -2,6 +2,8 @@ package org.com.longestpalindromeinastring;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LongestPalindromeTest {
     @Test
@@ -16,10 +18,11 @@ public class LongestPalindromeTest {
                 () -> DynamicLongestPalindrome.findLongestPalindrome(""));
     }
 
-    @Test
-    public void testDynamicLP_successNoPalindrome() throws Exception {
-        Assertions.assertEquals( "",
-                DynamicLongestPalindrome.findLongestPalindrome("abcd"));
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "abcd"})
+    public void testDynamicLP_successOneCharacter(String value) throws Exception {
+        Assertions.assertEquals( "a",
+                DynamicLongestPalindrome.findLongestPalindrome(value));
     }
 
     @Test
@@ -29,14 +32,34 @@ public class LongestPalindromeTest {
     }
 
     @Test
-    public void testBruteForceL_throwsException() {
+    public void testBruteForceLP_throwsException() {
         Assertions.assertThrows( Exception.class,
                 () -> BruteForceLongestPalindrome.findLongestPalindrome(""));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "abcd"})
+    public void testBruteForceLP_successOneCharacter(String value) throws Exception {
+        Assertions.assertEquals( "a",
+                BruteForceLongestPalindrome.findLongestPalindrome(value));
+    }
+
     @Test
-    public void testBruteForceL_successNoPalindrome() throws Exception {
-        Assertions.assertEquals( "",
-                BruteForceLongestPalindrome.findLongestPalindrome("abcd"));
+    public void testMemoizationLP_success() throws Exception {
+        Assertions.assertEquals( "abkkba",
+                MemoizationLongestPalindrome.findLongestPalindrome("abacabkkba"));
+    }
+
+    @Test
+    public void testMemoizationLP_throwsException() {
+        Assertions.assertThrows( Exception.class,
+                () -> MemoizationLongestPalindrome.findLongestPalindrome(""));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "abcd"})
+    public void testMemoizationLP_successOneCharacter(String value) throws Exception {
+        Assertions.assertEquals( "a",
+                MemoizationLongestPalindrome.findLongestPalindrome(value));
     }
 }

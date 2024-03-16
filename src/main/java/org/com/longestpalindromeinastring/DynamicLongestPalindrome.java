@@ -7,7 +7,7 @@ public class DynamicLongestPalindrome {
         if ( input == null || input.trim().length() == 0 )
             throw new Exception("String is empty.");
 
-        int from = 0, to = 0, max = 1;
+        int from = 0, to = 0, max = 0;
         int size = input.length();
         /* isPalindrome[i][j] means input.substring(i,j+1) is a palindrome or not a palindrome */
         boolean[][] isPalindrome = new boolean[size][size];
