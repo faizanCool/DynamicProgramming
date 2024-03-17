@@ -6,7 +6,8 @@ public class RecursiveWithMemoization {
     public static int fibonacci(int n) throws Exception {
         fibMemory = new Integer[n + 1];
         fibMemory[0] = 0;
-        fibMemory[1] = 1;
+        if (n > 0)
+            fibMemory[1] = 1;
         return calculateFibonacci(n);
     }
 

@@ -3,14 +3,12 @@ package org.com.longestpalindromeinastring;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 public class LongestPalindromeTest {
-    @Test
-    public void testDynamicLP_success() throws Exception {
-        Assertions.assertEquals( "abkkba",
-            DynamicLongestPalindrome.findLongestPalindrome("abacabkkba"));
-    }
 
     @Test
     public void testDynamicLP_throwsException() {
@@ -19,16 +17,10 @@ public class LongestPalindromeTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"a", "abcd"})
-    public void testDynamicLP_successOneCharacter(String value) throws Exception {
-        Assertions.assertEquals( "a",
-                DynamicLongestPalindrome.findLongestPalindrome(value));
-    }
-
-    @Test
-    public void testBruteForceLP_success() throws Exception {
-        Assertions.assertEquals( "abkkba",
-                BruteForceLongestPalindrome.findLongestPalindrome("abacabkkba"));
+    @MethodSource("longestPalindromeInputAndExpected")
+    public void testDynamicLP_success(String input, String expected) throws Exception {
+        Assertions.assertEquals( expected,
+                DynamicLongestPalindrome.findLongestPalindrome(input));
     }
 
     @Test
@@ -38,16 +30,10 @@ public class LongestPalindromeTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"a", "abcd"})
-    public void testBruteForceLP_successOneCharacter(String value) throws Exception {
-        Assertions.assertEquals( "a",
-                BruteForceLongestPalindrome.findLongestPalindrome(value));
-    }
-
-    @Test
-    public void testMemoizationLP_success() throws Exception {
-        Assertions.assertEquals( "abkkba",
-                MemoizationLongestPalindrome.findLongestPalindrome("abacabkkba"));
+    @MethodSource("longestPalindromeInputAndExpected")
+    public void testBruteForceLP_success(String input, String expected) throws Exception {
+        Assertions.assertEquals( expected,
+                BruteForceLongestPalindrome.findLongestPalindrome(input));
     }
 
     @Test
@@ -57,9 +43,17 @@ public class LongestPalindromeTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"a", "abcd"})
-    public void testMemoizationLP_successOneCharacter(String value) throws Exception {
-        Assertions.assertEquals( "a",
-                MemoizationLongestPalindrome.findLongestPalindrome(value));
+    @MethodSource("longestPalindromeInputAndExpected")
+    public void testMemoizationLP_success(String input, String expected) throws Exception {
+        Assertions.assertEquals( expected,
+                MemoizationLongestPalindrome.findLongestPalindrome(input));
+    }
+
+    static Stream<Arguments> longestPalindromeInputAndExpected() {
+        return Stream.of(
+                Arguments.arguments("abacabkkba", "abkkba"),
+                Arguments.arguments("abcd", "a"),
+                Arguments.arguments("a", "a")
+        );
     }
 }
