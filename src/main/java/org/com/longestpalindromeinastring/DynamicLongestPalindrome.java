@@ -1,7 +1,6 @@
 package org.com.longestpalindromeinastring;
 
 public class DynamicLongestPalindrome {
-
     public static String findLongestPalindrome(final String input) throws Exception {
 
         if ( input == null || input.trim().length() == 0 )
@@ -12,13 +11,12 @@ public class DynamicLongestPalindrome {
         /* isPalindrome[i][j] means input.substring(i,j+1) is a palindrome or not a palindrome */
         boolean[][] isPalindrome = new boolean[size][size];
 
-
         isPalindrome[0][0] = true;
         for (int i = 1; i < size; i++) {
             /* every single character is a palindrome itself, so -> */
             isPalindrome[i][i] = true;
             /* comparing two characters */
-            isPalindrome[i][i-1] = input.charAt(i) == input.charAt(i-1);
+            isPalindrome[i-1][i] = input.charAt(i) == input.charAt(i-1);
         }
 
         /* logic
@@ -27,10 +25,10 @@ public class DynamicLongestPalindrome {
         * */
         for (int endIndex = 2; endIndex < size; endIndex++ ) {
             for (int startIndex = 0; startIndex < endIndex - 1; startIndex++) {
-                boolean temp = isPalindrome[endIndex-1][startIndex+1] &&
+                boolean temp = isPalindrome[startIndex+1][endIndex-1] &&
                         (input.charAt(endIndex) == input.charAt(startIndex));
                 if (temp) {
-                    isPalindrome[endIndex][startIndex] = temp;
+                    isPalindrome[startIndex][endIndex] = temp;
                     int palLength = endIndex - startIndex + 1;
                     if (max < palLength) {
                         max = palLength;
@@ -40,6 +38,6 @@ public class DynamicLongestPalindrome {
                 }
             }
         }
-        return max == 1 ? "" : input.substring(from, to + 1) ;
+        return input.substring(from, to + 1) ;
     }
 }
